@@ -1,0 +1,11 @@
+@Api_HostAddress = http://localhost:5147/api
+
+@BuyAmount = 1
+GET {{Api_HostAddress}}/v1/meta-exchange/plan?type=buy&amount={{BuyAmount}}
+Accept: application/json
+
+###
+
+@SellAmount = 1
+GET {{Api_HostAddress}}/v1/meta-exchange/plan?type=sell&amount={{SellAmount}}
+Accept: application/json

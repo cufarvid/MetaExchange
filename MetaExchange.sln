@@ -13,6 +13,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{689C1212
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetaExchange.Tests", "tests\MetaExchange.Tests\MetaExchange.Tests.csproj", "{6B6A0585-12E1-4A7A-AEFA-B104D6EE7AEC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetaExchange.Api", "src\MetaExchange.Api\MetaExchange.Api.csproj", "{3DDF31D3-C2E9-403D-B28D-491CF2EC90B3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{79FF676E-54F5-4C18-B576-C0DBA18A34F1}"
+	ProjectSection(SolutionItems) = preProject
+		compose.yaml = compose.yaml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -34,10 +41,15 @@ Global
 		{6B6A0585-12E1-4A7A-AEFA-B104D6EE7AEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6B6A0585-12E1-4A7A-AEFA-B104D6EE7AEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6B6A0585-12E1-4A7A-AEFA-B104D6EE7AEC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3DDF31D3-C2E9-403D-B28D-491CF2EC90B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3DDF31D3-C2E9-403D-B28D-491CF2EC90B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3DDF31D3-C2E9-403D-B28D-491CF2EC90B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3DDF31D3-C2E9-403D-B28D-491CF2EC90B3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{1A848A7C-3075-4DB5-9EE4-AB79D418691D} = {61C9D832-892C-4A00-9387-75950F68B86F}
 		{7D2747FB-3620-4B5B-BD94-A5A733441A77} = {61C9D832-892C-4A00-9387-75950F68B86F}
 		{6B6A0585-12E1-4A7A-AEFA-B104D6EE7AEC} = {689C1212-9DB9-418D-B5C7-87AAE05557CF}
+		{3DDF31D3-C2E9-403D-B28D-491CF2EC90B3} = {61C9D832-892C-4A00-9387-75950F68B86F}
 	EndGlobalSection
 EndGlobal
