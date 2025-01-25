@@ -9,7 +9,7 @@ Includes both [API](#api) and [Console](#console) interfaces.
 Run the console application with the following command:
 
 ```bash
-dotnet run --project src/MetaExchange.Console <OrderBookFilePath>
+dotnet run --project src/MetaExchange.Console <filepath> [type=buy|sell] [amount=1.0]
 ```
 
 ## API
