@@ -1,3 +1,5 @@
+using MetaExchange.Core.Enums;
+
 namespace MetaExchange.Core.Models;
 
-public sealed record Order(int? Id, DateTime Time, string Type, string Kind, decimal Amount, decimal Price);
+public sealed record Order(int? Id, DateTime Time, OrderType Type, decimal Amount, decimal Price);

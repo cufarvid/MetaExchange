@@ -6,4 +6,7 @@ var filePath = args.Length > 0
 
 var fileExchangeService = new FileExchangeService(filePath);
 
-var exchanges = fileExchangeService.GetExchanges();
+var metaExchangeService = new MetaExchangeService(fileExchangeService);
+
+var buyExecutionPlan = metaExchangeService.GetBestBuyExecutionPlan(1m);
+var sellExecutionPlan = metaExchangeService.GetBestSellExecutionPlan(1m);
