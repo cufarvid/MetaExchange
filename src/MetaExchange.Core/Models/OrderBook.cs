@@ -1,3 +1,3 @@
 namespace MetaExchange.Core.Models;
 
-public sealed record OrderBook(IReadOnlyList<OrderWrapper> Bids, IReadOnlyList<OrderWrapper> Asks);
+public sealed record OrderBook(IList<OrderWrapper> Bids, IList<OrderWrapper> Asks);

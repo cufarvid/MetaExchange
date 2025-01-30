@@ -205,6 +205,43 @@ public class MetaExchangeServiceTests
         });
     }
 
+    [Fact]
+    public void GetBestBuyExecutionPlan_ExecutedTwice_UsesUpdatedOrderBook()
+    {
+        // Arrange
+        var asks = new List<Order>
+        {
+            // Should be fully filled and removed
+            TestOrder.Sell(1m, 1000m),
+            // Should be partially filled and updated
+            TestOrder.Sell(2m, 1100m)
+        };
+
+        var exchange = TestExchange.CreateExchange("Exchange1", new Balance(3m, 10_000m), [], asks);
+        _exchangeServiceMock.Setup(service => service.GetExchanges())
+            .Returns(new List<Exchange> { exchange });
+
+        // Act
+        var firstResult = _metaExchangeService.GetBestBuyExecutionPlan(1.5m);
+        var secondResult = _metaExchangeService.GetBestBuyExecutionPlan(1m);
+
+        // Assert
+        // First execution should use both orders
+        firstResult.Should().HaveCount(2);
+        // First order fully filled
+        firstResult[0].Should().BeEquivalentTo(new { Amount = 1m, Price = 1000m });
+        // Second order partially filled
+        firstResult[1].Should().BeEquivalentTo(new { Amount = 0.5m, Price = 1100m });
+
+        // Second execution should only see the remaining amount from second order
+        secondResult.Should().HaveCount(1);
+        secondResult[0].Should().BeEquivalentTo(new { Amount = 1m, Price = 1100m });
+
+        // Verify final order book state has only 0.5 BTC left from second order
+        exchange.OrderBook.Asks.Should().ContainSingle()
+            .Which.Order.Amount.Should().Be(0.5m);
+    }
+
     #endregion
 
     #region Sell

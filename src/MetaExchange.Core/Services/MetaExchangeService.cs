@@ -56,6 +56,8 @@ public class MetaExchangeService(IExchangeService exchangeService) : IMetaExchan
 
             exchange.Balance.UpdateEUR(-buyCost);
             remainingAmount -= buyAmount;
+            
+            UpdateOrderAfterExecution(order, exchange.OrderBook.Asks, buyAmount);
 
             executedOrders.Add(new ExecutedOrder(exchange.Id, OrderType.Buy, buyAmount, order.Price));
         }
@@ -91,6 +93,8 @@ public class MetaExchangeService(IExchangeService exchangeService) : IMetaExchan
 
             exchange.Balance.UpdateBTC(-sellAmount);
             remainingAmount -= sellAmount;
+            
+            UpdateOrderAfterExecution(order, exchange.OrderBook.Bids, sellAmount);
 
             executedOrders.Add(new ExecutedOrder(exchange.Id, OrderType.Sell, sellAmount, order.Price));
         }
@@ -131,6 +135,27 @@ public class MetaExchangeService(IExchangeService exchangeService) : IMetaExchan
         var amount = Math.Min(amountByOrder, amountByBalance);
 
         return decimal.Round(amount, MaxDecimals);
+    }
+   
+    /// <summary>
+    /// Update the order after execution.
+    /// </summary>
+    /// <param name="order">The order to update.</param>
+    /// <param name="orders">The list of orders.</param>
+    /// <param name="executedAmount">The executed amount.</param>
+    private static void UpdateOrderAfterExecution(Order order, IList<OrderWrapper> orders, decimal executedAmount)
+    {
+        var remainingAmount = order.Amount - executedAmount;
+        
+        if (remainingAmount <= MinTradeAmount)
+        {
+            var orderWrapper = orders.First(wrapper => wrapper.Order == order);
+            orders.Remove(orderWrapper);
+        }
+        else
+        {
+            order.Amount = remainingAmount;
+        }
     }
 
     /// <summary>
